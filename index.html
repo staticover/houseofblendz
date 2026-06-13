@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="House of Blendz — Premier barbershop in Selma, NC. Sharp fades, clean lineups, old-school craft." />
+  <title>House of Blendz | Premier Barber in Selma, NC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown-deep:   #0B0704;
+      --brown-rich:   #140C07;
+      --brown-mid:    #1E1108;
+      --brown-warm:   #2A1A0E;
+      --brown-accent: #5C3A1E;
+      --brown-light:  #8B5E3C;
+
+      --chrome:       #C8C8C8;
+      --chrome-bright:#E8E6E2;
+      --chrome-mid:   #A0A0A0;
+      --chrome-dark:  #6A6A6A;
+
+      --cream:        #F2E8D9;
+      --cream-dim:    #B8A898;
+      --cream-mute:   #7A6A5A;
+
+      --glass-bg:     rgba(255,255,255,0.04);
+      --glass-border: rgba(200,200,200,0.12);
+      --glass-shine:  rgba(255,255,255,0.07);
+
+      --radius-sm: 6px;
+      --radius:    12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--brown-deep);
+      color: var(--cream);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ─── AMBIENT LIGHT ─── */
+    .ambient {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(92,58,30,0.18) 0%, transparent 70%);
+      top: -200px; left: -200px;
+    }
+    .ambient-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,200,200,0.06) 0%, transparent 70%);
+      bottom: 10%; right: -100px;
+    }
+
+    /* ─── CHROME GRADIENT TEXT ─── */
+    .chrome-text {
+      background: linear-gradient(135deg, #A0A0A0 0%, #E8E6E2 35%, #C8C8C8 60%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brown-text {
+      background: linear-gradient(135deg, #8B5E3C 0%, #C4874A 50%, #8B5E3C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(11,7,4,0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 40px;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--cream);
+    }
+    .nav-logo em {
+      font-style: italic;
+      background: linear-gradient(135deg, #A0A0A0 0%, #E8E6E2 50%, #A0A0A0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--chrome-bright); }
+
+    .btn-nav {
+      background: linear-gradient(135deg, rgba(200,200,200,0.12), rgba(200,200,200,0.06));
+      border: 1px solid rgba(200,200,200,0.2);
+      color: var(--chrome-bright) !important;
+      padding: 10px 24px !important;
+      border-radius: var(--radius-sm) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s !important;
+    }
+    .btn-nav:hover {
+      background: linear-gradient(135deg, rgba(200,200,200,0.2), rgba(200,200,200,0.1)) !important;
+      border-color: rgba(200,200,200,0.4) !important;
+      color: #fff !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--cream-dim);
+      transition: 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11,7,4,0.97);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      z-index: 199;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--cream-dim);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      padding: 12px 0;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--cream); }
+    .mobile-nav-close {
+      position: absolute;
+      top: 28px; right: 36px;
+      background: none;
+      border: none;
+      color: var(--cream-dim);
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      touch-action: manipulation;
+      min-height: 52px;
+      padding: 16px 40px;
+      border-radius: var(--radius-sm);
+      transition: all 0.3s;
+    }
+
+    .btn-chrome {
+      background: linear-gradient(135deg, #888 0%, #C8C8C8 35%, #E8E6E2 55%, #A0A0A0 100%);
+      color: #0B0704;
+      box-shadow: 0 4px 30px rgba(200,200,200,0.15), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .btn-chrome:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(200,200,200,0.25), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .btn-chrome:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--chrome);
+      border: 1px solid rgba(200,200,200,0.25);
+    }
+    .btn-ghost:hover {
+      background: rgba(200,200,200,0.06);
+      border-color: rgba(200,200,200,0.45);
+      transform: translateY(-2px);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 32px 100px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chrome-mid);
+      position: relative;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--chrome-dark));
+    }
+    .hero-eyebrow::after {
+      background: linear-gradient(90deg, var(--chrome-dark), transparent);
+    }
+
+    #hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .hero-h1-line2 {
+      font-style: italic;
+      font-size: clamp(3rem, 8.5vw, 6.5rem);
+    }
+
+    .hero-location {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--glass-border), transparent);
+      margin: 64px auto 0;
+      position: relative;
+    }
+
+    /* ─── MARQUEE STRIP ─── */
+    .marquee-strip {
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.02);
+      padding: 18px 0;
+      position: relative;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 32px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--chrome-dark);
+      white-space: nowrap;
+    }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--brown-accent);
+      flex-shrink: 0;
+    }
+
+    /* ─── SECTION ─── */
+    section { padding: 100px 32px; position: relative; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chrome-mid);
+      margin-bottom: 20px;
+    }
+    .section-tag::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--chrome-dark);
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      color: var(--cream);
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--cream-mute);
+      line-height: 1.8;
+      max-width: 480px;
+      font-weight: 300;
+    }
+
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--brown-rich); }
+
+    .services-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--glass-border);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .svc {
+      background: var(--brown-rich);
+      padding: 44px 36px;
+      transition: background 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .svc:hover { background: var(--brown-warm); }
+    .svc:hover::after { opacity: 1; }
+
+    .svc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--chrome-dark);
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .svc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .svc-desc {
+      font-size: 0.85rem;
+      color: var(--cream-mute);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .svc-arrow {
+      position: absolute;
+      bottom: 36px;
+      right: 36px;
+      width: 28px;
+      height: 28px;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: all 0.3s;
+      color: var(--chrome-mid);
+    }
+    .svc:hover .svc-arrow { opacity: 1; transform: translate(0,0); }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--brown-deep); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-frame {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(145deg, var(--brown-warm), var(--brown-mid));
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Decorative inner shimmer — no text */
+    .about-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(145deg, rgba(200,200,200,0.06) 0%, transparent 50%),
+        repeating-linear-gradient(
+          -45deg,
+          transparent 0px,
+          transparent 30px,
+          rgba(255,255,255,0.015) 30px,
+          rgba(255,255,255,0.015) 31px
+        );
+    }
+
+    .about-badge-wrap {
+      position: absolute;
+      bottom: 28px;
+      right: -28px;
+      width: 110px;
+      height: 110px;
+    }
+
+    .about-badge {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5C3A1E, #8B5E3C);
+      border: 1px solid rgba(200,200,200,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .about-badge strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .about-badge span {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-top: 3px;
+    }
+
+    .about-accent-line {
+      position: absolute;
+      top: 28px;
+      left: -28px;
+      width: 2px;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--brown-accent), transparent);
+    }
+
+    .about-content { position: relative; }
+
+    .about-stat-row {
+      display: flex;
+      gap: 40px;
+      margin: 40px 0;
+      padding: 32px 0;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .about-stat strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .about-stat span {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-mute);
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    #reviews { background: var(--brown-rich); }
+
+    .reviews-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .rating-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+      padding: 10px 20px;
+    }
+
+    .stars-row {
+      display: flex;
+      gap: 3px;
+    }
+    .stars-row svg { width: 13px; height: 13px; fill: #C4874A; }
+
+    .rating-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .rating-label {
+      font-size: 0.72rem;
+      color: var(--cream-mute);
+      letter-spacing: 0.05em;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      padding: 36px 32px;
+      border-radius: var(--radius-lg);
+    }
+
+    .review-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--brown-accent);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .review-text {
+      font-size: 0.92rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brown-accent), var(--brown-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .review-meta { font-size: 0.75rem; color: var(--cream-mute); margin-top: 2px; }
+
+    /* ─── GALLERY ─── */
+    #gallery { background: var(--brown-deep); padding-bottom: 0; }
+
+    .gallery-top { margin-bottom: 48px; }
+
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 8px;
+    }
+
+    .gallery-cell {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: var(--brown-warm);
+      border: 1px solid var(--glass-border);
+    }
+
+    .gallery-cell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, transparent 50%),
+        repeating-linear-gradient(-45deg, transparent 0, transparent 20px, rgba(255,255,255,0.01) 20px, rgba(255,255,255,0.01) 21px);
+    }
+
+    .gallery-cell:first-child {
+      grid-row: span 2;
+      background: var(--brown-mid);
+    }
+
+    /* ─── CTA ─── */
+    #cta {
+      background: var(--brown-deep);
+      text-align: center;
+      padding: 120px 32px;
+    }
+
+    .cta-inner { max-width: 680px; margin: 0 auto; position: relative; }
+
+    .cta-ring {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,200,200,0.05);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-ring-2 {
+      width: 600px;
+      height: 600px;
+      border-color: rgba(200,200,200,0.03);
+    }
+
+    #cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    #cta p {
+      font-size: 0.95rem;
+      color: var(--cream-mute);
+      margin-bottom: 48px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── MAP ─── */
+    #map-section { padding: 0; background: var(--brown-deep); }
+
+    .map-header {
+      text-align: center;
+      padding: 80px 32px 48px;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 460px;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-embed::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 80px rgba(11,7,4,0.4);
+    }
+
+    .map-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      filter: saturate(0.7) brightness(0.85) sepia(0.15);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--brown-rich);
+      border-top: 1px solid var(--glass-border);
+      padding: 64px 40px 36px;
+    }
+
+    .footer-inner { max-width: 1160px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .footer-logo em {
+      font-style: italic;
+      background: linear-gradient(135deg, #A0A0A0 0%, #E8E6E2 50%, #A0A0A0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--cream-mute);
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 220px;
+    }
+
+    .footer-col h5 {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--chrome-dark);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a {
+      color: var(--cream-mute);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy { font-size: 0.75rem; color: var(--cream-mute); }
+    .footer-built { font-size: 0.75rem; color: var(--cream-mute); }
+    .footer-built a {
+      color: var(--chrome-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-built a:hover { color: var(--chrome-bright); }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .marquee-track { animation: none; transition: none; opacity: 1; transform: none; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-badge-wrap { right: 16px; }
+      .about-accent-line { display: none; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .gallery-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-cell:first-child { grid-row: span 1; height: 280px; }
+      .gallery-cell { height: 200px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 72px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-mosaic { grid-template-columns: 1fr; }
+      .gallery-cell { height: 200px; }
+      .gallery-cell:first-child { height: 260px; }
+      .hero-actions, .cta-actions { flex-direction: column; align-items: center; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .about-stat-row { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ambient ambient-1" aria-hidden="true"></div>
+<div class="ambient ambient-2" aria-hidden="true"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo">House of <em>Blendz</em></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <!-- PUT BOOKING LINK HERE -->
+    <li><a href="#booking" class="btn-nav">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#reviews">Reviews</a>
+  <!-- PUT BOOKING LINK HERE -->
+  <a href="#booking" style="color:var(--chrome-bright);margin-top:12px;">Book Now</a>
+</div>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-eyebrow" aria-hidden="true">Selma, North Carolina</div>
+
+  <h1>
+    <span class="chrome-text">Selma's Premier</span><br />
+    <span class="hero-h1-line2">Haircut & Fade</span>
+  </h1>
+
+  <p class="hero-location" aria-label="Best barber in Selma NC">
+    Premier Barber &nbsp;·&nbsp; Selma, NC
+  </p>
+
+  <div class="hero-actions">
+    <!-- PUT BOOKING LINK HERE -->
+    <a href="#booking" class="btn btn-chrome" aria-label="Book your appointment">
+      Book Your Chair
+    </a>
+    <a href="#services" class="btn btn-ghost">Our Services</a>
+  </div>
+
+  <div class="hero-divider" aria-hidden="true"></div>
+</section>
+
+
+
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services-top">
+      <div class="reveal">
+        <div class="section-tag">What We Offer</div>
+        <h2 class="section-heading" id="services-heading">
+          Craft Built on<br /><em style="font-style:italic;">Precision</em>
+        </h2>
+      </div>
+      <div class="reveal reveal-d2">
+        <p class="section-body">Every service is performed with intention. No rush. No shortcuts. Just clean work that speaks for itself.</p>
+      </div>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="svc">
+        <span class="svc-num">01</span>
+        <div class="svc-name">Fade &amp; Taper</div>
+        <p class="svc-desc">Low, mid, or high — smooth blends that transition flawlessly from skin to length.</p>
+        <svg class="svc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="svc">
+        <span class="svc-num">02</span>
+        <div class="svc-name">Sharp Lineup</div>
+        <p class="svc-desc">Crisp edges, precise temples. A lineup that frames your face with clean authority.</p>
+        <svg class="svc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="svc">
+        <span class="svc-num">03</span>
+        <div class="svc-name">Beard Sculpting</div>
+        <p class="svc-desc">Defined edges and perfect shape. Your beard, elevated to match the cut.</p>
+        <svg class="svc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="svc">
+        <span class="svc-num">04</span>
+        <div class="svc-name">Kids Cuts</div>
+        <p class="svc-desc">Patient and comfortable for every young client. Fresh cuts for the next generation.</p>
+        <svg class="svc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="svc">
+        <span class="svc-num">05</span>
+        <div class="svc-name">Full Service</div>
+        <p class="svc-desc">The complete experience — cut, fade, lineup, and beard all in one visit.</p>
+        <svg class="svc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <!-- PUT BOOKING LINK HERE -->
+      <a href="#booking" class="svc" style="text-decoration:none;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:linear-gradient(135deg,rgba(92,58,30,0.4),rgba(30,17,8,0.6));cursor:pointer;" aria-label="Book your appointment">
+        <span class="svc-num">Reserve</span>
+        <div class="svc-name chrome-text">Book Your Chair</div>
+        <p class="svc-desc" style="margin-bottom:0;">Secure your appointment today.</p>
+        <svg style="width:28px;height:28px;color:var(--chrome-mid);margin-top:24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="about-grid container">
+    <div class="about-visual reveal">
+      <div class="about-accent-line" aria-hidden="true"></div>
+      <div class="about-frame" role="img" aria-label="House of Blendz barbershop interior"></div>
+      <div class="about-badge-wrap" aria-label="Number one barber in Selma NC">
+        <div class="about-badge glass">
+          <strong class="chrome-text">#1</strong>
+          <span>Selma NC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-content reveal reveal-d2">
+      <div class="section-tag">Our Story</div>
+      <h2 class="section-heading" id="about-heading">
+        Where Craft<br /><em style="font-style:italic;">Meets Character</em>
+      </h2>
+      <p class="section-body">
+        House of Blendz isn't just a barbershop — it's a tradition. Built on the belief that a great cut changes how you carry yourself. Every client gets our full attention, every time.
+      </p>
+
+      <div class="about-stat-row">
+        <div class="about-stat">
+          <strong class="chrome-text">500+</strong>
+          <span>Happy Clients</span>
+        </div>
+        <div class="about-stat">
+          <strong class="brown-text">5★</strong>
+          <span>Google Rating</span>
+        </div>
+        <div class="about-stat">
+          <strong class="chrome-text">Selma</strong>
+          <span>NC's Best</span>
+        </div>
+      </div>
+
+      <!-- PUT BOOKING LINK HERE -->
+      <a href="#booking" class="btn btn-chrome">Book an Appointment</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ REVIEWS ══════════ -->
+<section id="reviews" aria-labelledby="reviews-heading">
+  <div class="container">
+    <div class="reviews-top">
+      <div class="reveal">
+        <div class="section-tag">Client Voices</div>
+        <h2 class="section-heading" id="reviews-heading">
+          Straight from<br /><em style="font-style:italic;">Selma</em>
+        </h2>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <article class="review-card glass reveal">
+        <div class="review-quote" aria-hidden="true">"</div>
+        <p class="review-text">Best fade in Johnston County. The attention to detail is something else — I won't go anywhere else now.</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">M</div>
+          <div>
+            <div class="review-name">Marcus T.</div>
+            <div class="review-meta">Selma, NC</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card glass reveal reveal-d2">
+        <div class="review-quote" aria-hidden="true">"</div>
+        <p class="review-text">Brought my son in for his first real cut. They made him feel so comfortable. Clean shop, great vibes, amazing work.</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">D</div>
+          <div>
+            <div class="review-name">Darnell W.</div>
+            <div class="review-meta">Selma, NC</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="review-card glass reveal reveal-d4">
+        <div class="review-quote" aria-hidden="true">"</div>
+        <p class="review-text">I drive from Smithfield just to come here. Lineup is always crisp, beard shape-up is on point every single time.</p>
+        <div class="review-author">
+          <div class="review-avatar" aria-hidden="true">J</div>
+          <div>
+            <div class="review-name">James R.</div>
+            <div class="review-meta">Smithfield, NC</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery" aria-labelledby="gallery-heading">
+  <div class="container">
+    <div class="gallery-top reveal">
+      <div class="section-tag">Our Work</div>
+      <h2 class="section-heading" id="gallery-heading">
+        Fresh Out<br /><em style="font-style:italic;">the Chair</em>
+      </h2>
+    </div>
+    <div class="gallery-mosaic reveal reveal-d2">
+      <div class="gallery-cell" role="img" aria-label="Barber work showcase"></div>
+      <div class="gallery-cell" role="img" aria-label="Barber work showcase"></div>
+      <div class="gallery-cell" role="img" aria-label="Barber work showcase"></div>
+      <div class="gallery-cell" role="img" aria-label="Barber work showcase"></div>
+      <div class="gallery-cell" role="img" aria-label="Barber work showcase"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CTA ══════════ -->
+<section id="cta" aria-label="Book appointment">
+  <div class="cta-inner reveal">
+    <div class="cta-ring" aria-hidden="true"></div>
+    <div class="cta-ring cta-ring-2" aria-hidden="true"></div>
+
+    <div class="section-tag" style="justify-content:center;display:flex;">Selma, NC</div>
+    <h2>
+      Your Best <em style="font-style:italic;" class="chrome-text">Haircut</em><br />
+      Starts Here
+    </h2>
+    <p>Spots go fast. Reserve your chair at House of Blendz and walk out looking the part.</p>
+    <div class="cta-actions">
+      <!-- PUT BOOKING LINK HERE -->
+      <a href="#booking" class="btn btn-chrome">Book Now</a>
+      <a href="#services" class="btn btn-ghost">View Services</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ MAP ══════════ -->
+<div id="map-section" aria-labelledby="map-heading">
+  <div class="map-header reveal">
+    <div class="section-tag" style="justify-content:center;display:flex;">Find Us</div>
+    <h2 class="section-heading" style="text-align:center;" id="map-heading">
+      Come See Us in<br /><em style="font-style:italic;" class="chrome-text">Selma, NC</em>
+    </h2>
+  </div>
+  <div class="map-embed">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25961.2!2d-78.3053!3d35.5368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac3c71a5655555%3A0xe5e6b87284f6f03d!2sSelma%2C+NC+27576!5e1!3m2!1sen!2sus!4v1718300000000!5m2!1sen!2sus"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="House of Blendz — Selma NC satellite map"
+      aria-label="Google Maps satellite view of Selma, NC"
+    ></iframe>
+  </div>
+</div>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#hero" class="footer-logo">House of <em>Blendz</em></a>
+        <p class="footer-tagline">Selma's premier barbershop. Where precision meets character.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Fades &amp; Tapers</a></li>
+          <li><a href="#services">Sharp Lineups</a></li>
+          <li><a href="#services">Beard Sculpting</a></li>
+          <li><a href="#services">Kids Cuts</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Visit</h5>
+        <ul>
+          <li><a href="#map-section">Selma, NC</a></li>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Appointments</h5>
+        <!-- PUT BOOKING LINK HERE -->
+        <a href="#booking" class="btn btn-chrome" style="padding:13px 28px;font-size:0.75rem;margin-top:4px;">
+          Book Now
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 House of Blendz &mdash; Selma, NC. All rights reserved.</p>
+      <p class="footer-built">Built by <a href="https://www.onstra.world" target="_blank" rel="noopener noreferrer">Onstra</a></p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav  = document.getElementById('mobileNav');
+  const closeBtn   = document.getElementById('mobileNavClose');
+
+  function openNav()  { mobileNav.classList.add('open');    hamburger.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; }
+  function closeNav() { mobileNav.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+
+  hamburger.addEventListener('click', openNav);
+  closeBtn .addEventListener('click', closeNav);
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
